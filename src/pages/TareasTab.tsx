@@ -4,19 +4,23 @@ import { PlusCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import TaskItem from '@/components/TaskItem';
 import AddTaskForm from '@/components/AddTaskForm';
-import { Task } from '@/types';
-import { loadTasks, saveTasks } from '@/utils/storage';
+import AIRecommendations from '@/components/AIRecommendations';
+import { Task, Habit } from '@/types';
+import { loadTasks, saveTasks, loadHabits } from '@/utils/storage';
 import { useToast } from '@/hooks/use-toast';
 
 const TareasTab = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
+  const [habits, setHabits] = useState<Habit[]>([]);
   const [isAddTaskOpen, setIsAddTaskOpen] = useState(false);
   const { toast } = useToast();
 
   useEffect(() => {
-    // Load tasks from local storage
+    // Load tasks and habits from local storage
     const savedTasks = loadTasks();
+    const savedHabits = loadHabits();
     setTasks(savedTasks);
+    setHabits(savedHabits);
   }, []);
 
   const handleAddTask = (task: Task) => {
@@ -63,6 +67,9 @@ const TareasTab = () => {
           <PlusCircle size={20} />
         </Button>
       </div>
+
+      {/* AI Recommendations */}
+      <AIRecommendations tasks={tasks} habits={habits} />
 
       {pendingTasks.length === 0 && (
         <div className="text-center py-12 text-gray-500">

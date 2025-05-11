@@ -28,3 +28,12 @@ export interface CalendarDay {
   isSelected: boolean;
   hasHabits: boolean;
 }
+
+export interface AIRecommendation {
+  id: string;
+  message: string;
+  type: 'task' | 'habit' | 'motivation';
+  dismissed: boolean;
+  createdAt: string;
+}
+
