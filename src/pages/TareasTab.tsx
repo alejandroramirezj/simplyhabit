@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import TaskItem from '@/components/TaskItem';
 import AddTaskForm from '@/components/AddTaskForm';
 import AIRecommendations from '@/components/AIRecommendations';
+import AIWeeklySchedule from '@/components/AIWeeklySchedule';
 import { Task, Habit } from '@/types';
 import { loadTasks, saveTasks, loadHabits } from '@/utils/storage';
 import { useToast } from '@/hooks/use-toast';
@@ -59,13 +60,16 @@ const TareasTab = () => {
     <div className="p-4">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold">Tareas 📝</h1>
-        <Button 
-          onClick={() => setIsAddTaskOpen(true)}
-          className="rounded-full h-10 w-10 p-0"
-          aria-label="Añadir tarea"
-        >
-          <PlusCircle size={20} />
-        </Button>
+        <div className="flex gap-2">
+          <AIWeeklySchedule tasks={tasks} />
+          <Button 
+            onClick={() => setIsAddTaskOpen(true)}
+            className="rounded-full h-10 w-10 p-0"
+            aria-label="Añadir tarea"
+          >
+            <PlusCircle size={20} />
+          </Button>
+        </div>
       </div>
 
       {/* AI Recommendations */}
